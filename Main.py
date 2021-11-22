@@ -1,17 +1,8 @@
 from functions import *
 
-# keyboard
-win.listen()
-win.onkeypress(rocket_left_up, "w")
-win.onkeypress(rocket_left_down, "s")
-win.onkeypress(rocket_right_up, "Up")
-win.onkeypress(rocket_right_down, "Down")
-
-score_a = 0
-score_b = 0
 
 while True:
-    win.update()
+    create_game_win()
     # ball movements
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
@@ -25,18 +16,16 @@ while True:
         ball.dy *= -1
 
     if ball.xcor() > 390:
-        ball.goto(0, 0)
-        ball.dx *= -1
+        ball_return()
         score_a += 1
         pen.clear()
-        pen.write(f"Player A: {score_a} || Player B: {score_b}", align="center", font=("Verdana", 22, "normal"))
+        pen.write(f"{player_a}: {score_a} || {player_b}: {score_b}", align="center", font=("Verdana", 22, "normal"))
 
     if ball.xcor() < -390:
-        ball.goto(0, 0)
-        ball.dx *= -1
+        ball_return()
         score_b += 1
         pen.clear()
-        pen.write(f"Player A: {score_a} || Player B: {score_b}", align="center", font=("Verdana", 22, "normal"))
+        pen.write(f"{player_a}: {score_a} || {player_b}: {score_b}", align="center", font=("Verdana", 22, "normal"))
 
     rocket_push()
-    win_side(score_a, score_b)
+    get_win(score_a, score_b)
