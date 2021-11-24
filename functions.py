@@ -1,7 +1,8 @@
 import time
 import turtle
+import random
 
-score = 1
+score = 4
 score_a = 0
 score_b = 0
 player_a = "Left Player"
@@ -15,10 +16,10 @@ def create_game_win(left_rocket, right_rocket):
     win.setup(width=800, height=600)
     win.tracer(0)
     win.listen()
-    win.onkeypress(rocket_up(left_rocket), "w")
-    win.onkeypress(rocket_down(left_rocket), "s")
-    win.onkeypress(rocket_up(right_rocket), "Up")
-    win.onkeypress(rocket_down(right_rocket), "Down")
+    win.onkeypress(lambda: rocket_up(left_rocket), "w")
+    win.onkeypress(lambda: rocket_down(left_rocket), "s")
+    win.onkeypress(lambda: rocket_up(right_rocket), "Up")
+    win.onkeypress(lambda: rocket_down(right_rocket), "Down")
     win.update()
     return win
 
@@ -42,8 +43,8 @@ def create_ball():
     ball.color("yellow")
     ball.penup()
     ball.goto(0, 0)
-    ball.dx = 10
-    ball.dy = 0
+    ball.dx = random.randint(2, 10)
+    ball.dy = random.randint(2, 10)
     return ball
 
 
@@ -61,11 +62,11 @@ def create_score_board():
 
 
 # rockets movement
-def rocket_left_up():
-    y = left_rocket.ycor()
+def rocket_up(rocket):
+    y = rocket.ycor()
     if y < 250:
         y += 20
-        left_rocket.sety(y)
+        rocket.sety(y)
 
 
 def rocket_down(rocket):
@@ -85,6 +86,7 @@ def clean_win(pen, ball, left_rocket, right_rocket):
 # ball return
 def ball_return(ball):
     ball.goto(0, 0)
+    ball.dy = random.randint(7, 15)
     ball.dx *= -1
 
 
