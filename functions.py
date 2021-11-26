@@ -1,12 +1,11 @@
-import time
 import turtle
 import random
 
-score = 4
+score = 2
 score_a = 0
 score_b = 0
-player_a = "Left Player"
-player_b = "Right Player"
+Player_a = "Left Player"
+Player_b = "Right Player"
 
 
 def create_game_win(left_rocket, right_rocket):
@@ -57,7 +56,7 @@ def create_score_board():
     pen.penup()
     pen.hideturtle()
     pen.goto(0, 260)
-    pen.write(f"{player_a}: {score_a} || {player_b}: {score_b}", align="center", font=("Verdana", 22, "normal"))
+    pen.write(f"{Player_a}: {score_a} || {Player_b}: {score_b}", align="center", font=("Verdana", 22, "normal"))
     return pen
 
 
@@ -90,17 +89,13 @@ def ball_return(ball):
     ball.dx *= -1
 
 
-def get_win(pen, score_a, score_b, ball, left_rocket, right_rocket):
+def get_win(pen, score_a, score_b):
     if score_a > score:
-        clean_win(pen, ball, left_rocket, right_rocket)
-        pen.write(f"{player_a} Win", align="center", font=("Verdana", 22, "normal"))
-        time.sleep(3)
-        turtle.bye()
+        pen.write(f"{Player_a} Win", align="center", font=("Verdana", 22, "normal"))
     elif score_b > score:
-        clean_win(pen, ball, left_rocket, right_rocket)
-        pen.write(f"{player_b} Win", align="center", font=("Verdana", 22, "normal"))
-        time.sleep(3)
-        turtle.bye()
+        pen.write(f"{Player_b} Win", align="center", font=("Verdana", 22, "normal"))
+    else:
+        pass
 
 
 # ball movement
